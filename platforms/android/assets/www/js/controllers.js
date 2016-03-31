@@ -114,13 +114,48 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $http, URL) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
+
+    var serialize = $.param({
+						k: 'BL117974797479747963AC'
+					});
+
+    $http({
+        url: URL.root+URL.conteudo,
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        // data: serialize
+    }).
+        success(function(data) {
+            $scope.registros = data;
+        }).
+        error(function(data) {
+            console.log('erro');
+            console.log(data);
+        }
+    );
+
+    $http({
+        url: URL.root+URL.confDashboard,
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        // data: serialize
+    }).
+        success(function(data) {
+            // console.log(data);
+            $scope.conf = data[0].Configuracao;
+        }).
+        error(function(data) {
+            console.log('erro');
+            console.log(data);
+        }
+    );
 
     // Set Motion
     $timeout(function() {

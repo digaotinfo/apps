@@ -5,7 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
-
+.constant('URL', {
+    root: 'http://localhost/mmgpApp/www/',
+    conteudo: "app-conteudo",
+    confDashboard: "app-configuracoes-dashboard"
+})
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -124,5 +128,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     ;
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/login');
+    $urlRouterProvider.otherwise('/app/profile');
+    // $urlRouterProvider.otherwise('/app/login');
 });

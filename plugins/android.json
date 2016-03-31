@@ -6,6 +6,16 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {},
+    "installed_plugins": {
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.sample374926"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.sample374926"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.sample374926"
+        }
+    },
     "dependent_plugins": {}
 }
