@@ -78,20 +78,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     })
 
     .state('app.gallery', {
-        url: '/gallery',
+        url: '/galeria/:evento_id',
         views: {
             'menuContent': {
                 templateUrl: 'templates/gallery.html',
                 controller: 'GalleryCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-gallery" class="button button-fab button-fab-top-right expanded button-energized-900 drop"><i class="icon ion-heart"></i></button>',
-                controller: function ($timeout) {
-                    $timeout(function () {
-                        document.getElementById('fab-gallery').classList.toggle('on');
-                    }, 600);
-                }
             }
+            // 'fabContent': {
+            //     template: '<button id="fab-gallery" class="button button-fab button-fab-top-right expanded button-energized-900 drop"><i class="icon ion-heart"></i></button>',
+            //     controller: function ($timeout) {
+            //         $timeout(function () {
+            //             document.getElementById('fab-gallery').classList.toggle('on');
+            //         }, 600);
+            //     }
+            // }
         }
     })
 
@@ -108,15 +108,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.profile', {
-        url: '/profile',
+    .state('app.ultimosEventos', {
+        url: '/ultimos-eventos',
         views: {
             'menuContent': {
-                templateUrl: 'templates/profile.html',
-                controller: 'ProfileCtrl'
+                templateUrl: 'templates/ultimosEventos.html',
+                controller: 'UtilmosEventosCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
+                // template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
                 controller: function ($timeout) {
                     /*$timeout(function () {
                         document.getElementById('fab-profile').classList.toggle('on');
@@ -125,9 +125,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             }
         }
     })
+    .state('app.evento', {
+        url: '/evento/:cat_id/:evento_id',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/evento.html',
+                controller: 'EventoCtrl'
+            }
+            // 'fabContent': {
+            //     template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-images"></i></button>',
+            //     controller: function ($timeout) {
+            //         // /*$timeout(function () {
+            //         //     document.getElementById('fab-profile').classList.toggle('on');
+            //         // }, 800);*/
+            //     }
+            // }
+        }
+    })
     ;
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/profile');
+    $urlRouterProvider.otherwise('/app/ultimos-eventos');
     // $urlRouterProvider.otherwise('/app/login');
 });

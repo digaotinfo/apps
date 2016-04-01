@@ -1,10 +1,9 @@
-<ion-view view-title="Profile">
+<ion-view view-title="Eventos Realizados">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
-        <div class="hero slide-up" style="background-image: url('img/profile-bg.jpg');">
+        <div class="hero slide-up" style="background-image: url('img/default/banner-home.jpg');">
             <div class="content">
-                <!-- <div class="avatar" style="background-image: url('img/daenerys.jpg');"></div> -->
-                <h3><a class="light">Missão Mundial Graça e Paz</a></h3>
-                <h4>Levanta o caido e da força ao que não tem nenhm vigor.</h4>
+                <h3 class="header"><a class="light">Missão Mundial Graça e Paz</a></h3>
+                <h4 class="subHeader">Levanta o caido e da força ao que não tem nenhm vigor.</h4>
             </div>
         </div>
         <div class="tabs tabs-dark tabs-icon-top static">
@@ -20,11 +19,10 @@
         </div>
         <h4 class="content padding double-padding-x">Ultimos Eventos</h4>
         <div class="list animate-fade-slide-in-right" ng-repeat="registro in registros">
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="http://localhost/mmgpApp/www/{{registro.Noticia.imagem}}">
-                <h2>{{registro.Noticia.titulo}}</h2>
-                <p>{{registro.Noticia.chamada}}</p>
-                <i class="icon ion-chatbubble muted"></i>
+            <a ui-sref="app.evento({cat_id: registro.categoria_id, evento_id: registro.id})" class="item item-avatar item-icon-right ultimos-eventos">
+                <img ng-src="{{registro.galeria[0].img_file}}" alt="{{registro.titulo_ptbr}}" />
+                <h2>{{registro.titulo_ptbr}}</h2>
+                <p>{{registro.galeria[0].legenda_ptbr}}</p>
             </a>
         </div>
     </ion-content>

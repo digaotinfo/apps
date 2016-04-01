@@ -114,17 +114,66 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $http, URL) {
+.controller('UtilmosEventosCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $http, URL) {
     // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
+    // $scope.$parent.showHeader();
+    // $scope.$parent.clearFabs();
+    // $scope.isExpanded = false;
+    // $scope.$parent.setExpanded(false);
+    // $scope.$parent.setHeaderFab(false);
 
     var serialize = $.param({
 						k: 'BL117974797479747963AC'
 					});
+    $scope.default = URL;
+    $http({
+        url: URL.root+URL.conteudo,
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        // data: serialize
+    }).
+        success(function(data) {
+            var registros = [];
+            $.each(data, function( key, values ){
+                $.each(values, function( index, val ){
+                    if( val.categoria_id == "31" ){
+                        registros.push(val);
+                    }
+                });
+            });
+            $scope.registros = registros;
+        }).
+        error(function(data) {
+            console.log('erro');
+            console.log(data);
+        }
+    );
+
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('EventoCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $http, URL) {
+    // Set Header
+    // $scope.$parent.showHeader();
+    // $scope.$parent.clearFabs();
+    // $scope.isExpanded = false;
+    // $scope.$parent.setExpanded(false);
+    // $scope.$parent.setHeaderFab(false);
+
 
     $http({
         url: URL.root+URL.conteudo,
@@ -133,7 +182,13 @@ angular.module('starter.controllers', [])
         // data: serialize
     }).
         success(function(data) {
-            $scope.registros = data;
+            $.each(data, function( key, values ){
+                $.each(values, function( index, val ){
+                    if( (val.categoria_id == $stateParams.cat_id) && (val.id == $stateParams.evento_id) ){
+                        $scope.registro = val;
+                    }
+                });
+            });
         }).
         error(function(data) {
             console.log('erro');
@@ -141,21 +196,7 @@ angular.module('starter.controllers', [])
         }
     );
 
-    $http({
-        url: URL.root+URL.confDashboard,
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        // data: serialize
-    }).
-        success(function(data) {
-            // console.log(data);
-            $scope.conf = data[0].Configuracao;
-        }).
-        error(function(data) {
-            console.log('erro');
-            console.log(data);
-        }
-    );
+
 
     // Set Motion
     $timeout(function() {
@@ -191,12 +232,37 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab(false);
+.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, $http, URL) {
+    // $scope.$parent.showHeader();
+    // $scope.$parent.clearFabs();
+    // $scope.isExpanded = true;
+    // $scope.$parent.setExpanded(true);
+    // $scope.$parent.setHeaderFab(false);
+
+
+    $http({
+        url: URL.root+URL.conteudo,
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        // data: serialize
+    }).
+        success(function(data) {
+            // console.log(data);
+            var registros = [];
+            $.each(data, function( key, values ){
+                $.each(values, function( index, val ){
+                    if( (val.id == $stateParams.evento_id) ){
+                        registros.push(val.galeria);
+                    }
+                });
+            });
+            $scope.registros = registros[0];
+        }).
+        error(function(data) {
+            console.log('erro');
+            console.log(data);
+        }
+    );
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
