@@ -114,48 +114,94 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('ProfileCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $http, URL) {
+.controller('UtilmosEventosCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $http, URL) {
     // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
+    // $scope.$parent.showHeader();
+    // $scope.$parent.clearFabs();
+    // $scope.isExpanded = false;
+    // $scope.$parent.setExpanded(false);
+    // $scope.$parent.setHeaderFab(false);
 
     var serialize = $.param({
 						k: 'BL117974797479747963AC'
 					});
-
-    $http({
+    // $scope.default = URL;
+    var config = {
+        method: 'POST',
         url: URL.root+URL.conteudo,
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        // data: serialize
-    }).
-        success(function(data) {
-            $scope.registros = data;
-        }).
-        error(function(data) {
-            console.log('erro');
-            console.log(data);
+        headers: {
+            'Content-Type': undefined
+            // 'Content-Type': 'application/x-www-form-urlencoded'
         }
-    );
+        // data: {
+        //     "channel": "teste"
+        // }
+    };
+    $http(config).success(function(data) {
+        var registros = [];
+        $.each(data, function( key, values ){
+            $.each(values, function( index, val ){
+                if( val.categoria_id == "31" ){
+                    registros.push(val);
+                }
+            });
+        });
+        $scope.registros = registros;
 
-    $http({
-        url: URL.root+URL.confDashboard,
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        // data: serialize
-    }).
-        success(function(data) {
-            // console.log(data);
-            $scope.conf = data[0].Configuracao;
-        }).
-        error(function(data) {
-            console.log('erro');
-            console.log(data);
-        }
-    );
+        // // Set Motion
+        // $timeout(function() {
+        //     ionicMaterialMotion.slideUp({
+        //         selector: '.slide-up'
+        //     });
+        // }, 900);
+        //
+        // $timeout(function() {
+        //     ionicMaterialMotion.fadeSlideInRight({
+        //         startVelocity: 3000
+        //     });
+        // }, 1400);
+        // // Set Ink
+        // ionicMaterialInk.displayEffect();
+    }).error(function(response) {
+        console.log('erro');
+        console.log(response);
+    });
+    // $http({
+    //     url: URL.root+URL.conteudo,
+    //     method: 'POST',
+    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    //     // data: serialize
+    // }).
+    //     success(function(data) {
+    //         var registros = [];
+    //         $.each(data, function( key, values ){
+    //             $.each(values, function( index, val ){
+    //                 if( val.categoria_id == "31" ){
+    //                     registros.push(val);
+    //                 }
+    //             });
+    //         });
+    //         $scope.registros = registros;
+    //     }).
+    //     error(function(data) {
+    //         console.log('erro');
+    //         console.log(data);
+    //     }
+    // );
+
+
+    // // Set Motion
+    // $timeout(function() {
+    //     ionicMaterialMotion.slideUp({
+    //         selector: '.slide-up'
+    //     });
+    // }, 900);
+    //
+    // $timeout(function() {
+    //     ionicMaterialMotion.fadeSlideInRight({
+    //         startVelocity: 3000
+    //     });
+    // }, 1400);
 
     // Set Motion
     $timeout(function() {
@@ -168,10 +214,99 @@ angular.module('starter.controllers', [])
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 3000
         });
-    }, 700);
+    }, 10000);
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+.controller('EventoCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $http, URL) {
+    // Set Header
+    // $scope.$parent.showHeader();
+    // $scope.$parent.clearFabs();
+    // $scope.isExpanded = false;
+    // $scope.$parent.setExpanded(false);
+    // $scope.$parent.setHeaderFab(false);
+
+    var config = {
+        method: 'POST',
+        url: URL.root+URL.conteudo,
+        headers: {
+            'Content-Type': undefined
+            // 'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        // data: {
+        //     "channel": "teste"
+        // }
+    };
+    $http(config).success(function(data) {
+        $.each(data, function( key, values ){
+            $.each(values, function( index, val ){
+                if( (val.categoria_id == $stateParams.cat_id) && (val.id == $stateParams.evento_id) ){
+                    $scope.registro = val;
+                }
+            });
+        });
+
+
+
+    }).error(function(response) {
+        console.log('erro');
+        console.log(response);
+    });
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 10000);
 
     // Set Ink
     ionicMaterialInk.displayEffect();
+
+    // $http({
+    //     url: URL.root+URL.conteudo,
+    //     method: 'POST',
+    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    //     // data: serialize
+    // }).
+    //     success(function(data) {
+    //         $.each(data, function( key, values ){
+    //             $.each(values, function( index, val ){
+    //                 if( (val.categoria_id == $stateParams.cat_id) && (val.id == $stateParams.evento_id) ){
+    //                     $scope.registro = val;
+    //                 }
+    //             });
+    //         });
+    //     }).
+    //     error(function(data) {
+    //         console.log('erro');
+    //         console.log(data);
+    //     }
+    // );
+
+
+
+    // // Set Motion
+    // $timeout(function() {
+    //     ionicMaterialMotion.slideUp({
+    //         selector: '.slide-up'
+    //     });
+    // }, 900);
+    //
+    // $timeout(function() {
+    //     ionicMaterialMotion.fadeSlideInRight({
+    //         startVelocity: 3000
+    //     });
+    // }, 1400);
+    //
+    // // Set Ink
+    // ionicMaterialInk.displayEffect();
 })
 
 .controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
@@ -191,12 +326,62 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab(false);
+.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, $http, URL) {
+    // $scope.$parent.showHeader();
+    // $scope.$parent.clearFabs();
+    // $scope.isExpanded = true;
+    // $scope.$parent.setExpanded(true);
+    // $scope.$parent.setHeaderFab(false);
+
+    var config = {
+        method: 'POST',
+        url: URL.root+URL.conteudo,
+        headers: {
+            'Content-Type': undefined
+            // 'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        // data: {
+        //     "channel": "teste"
+        // }
+    };
+    $http(config).success(function(data) {
+        var registros = [];
+        $.each(data, function( key, values ){
+            $.each(values, function( index, val ){
+                if( (val.id == $stateParams.evento_id) ){
+                    registros.push(val.galeria);
+                }
+            });
+        });
+        $scope.registros = registros[0];
+    }).error(function(response) {
+        console.log('erro');
+        console.log(response);
+    });
+
+    // $http({
+    //     url: URL.root+URL.conteudo,
+    //     method: 'POST',
+    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    //     // data: serialize
+    // }).
+    //     success(function(data) {
+    //         // console.log(data);
+    //         var registros = [];
+    //         $.each(data, function( key, values ){
+    //             $.each(values, function( index, val ){
+    //                 if( (val.id == $stateParams.evento_id) ){
+    //                     registros.push(val.galeria);
+    //                 }
+    //             });
+    //         });
+    //         $scope.registros = registros[0];
+    //     }).
+    //     error(function(data) {
+    //         console.log('erro');
+    //         console.log(data);
+    //     }
+    // );
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
@@ -204,10 +389,11 @@ angular.module('starter.controllers', [])
     ionicMaterialMotion.pushDown({
         selector: '.push-down'
     });
-    ionicMaterialMotion.fadeSlideInRight({
-        selector: '.animate-fade-slide-in .item'
-    });
-
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            selector: '.animate-fade-slide-in .item'
+        });
+    }, 10000);
 })
 
 ;

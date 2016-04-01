@@ -30,12 +30,12 @@
     <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
     <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
     <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
-    <name>sample</name>
+    <name>MMGP APP</name>
     <description>
-        An Ionic Framework and Cordova project.
+        App Missão Mundial Graça e Paz
     </description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+    <author email="digaot.info@gmail.com" href="https://www.facebook.com/digao.prog">
+      Digão Developer
     </author>
     <content src="index.html" />
     <access origin="*" />

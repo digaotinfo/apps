@@ -77,3 +77,25 @@ p {
     position: fixed;
     bottom: 0;
 }
+
+
+
+
+h3.header{text-shadow: 2px 3px #000000;}
+h4.subHeader{font-size: 80%;    text-shadow: 2px 1px #000000;}
+.bar.bar-header{
+    background-color: #23166E !important;
+}
+.ultimos-eventos.item-avatar img{
+    max-height: 50px;
+    max-width: 50px;
+    left: 23px;
+}
+.chamada.ng-binding {
+    padding-bottom: 15px;
+}
+.galeria a {
+    font-size: 30px;
+    text-decoration: none;
+    color: #322656;
+}

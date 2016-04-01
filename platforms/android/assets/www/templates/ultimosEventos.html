@@ -1,0 +1,29 @@
+<ion-view view-title="Eventos Realizados">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-image: url('img/default/banner-home.jpg');">
+            <div class="content">
+                <h3 class="header"><a class="light">Missão Mundial Graça e Paz</a></h3>
+                <h4 class="subHeader">Levanta o caido e da força ao que não tem nenhm vigor.</h4>
+            </div>
+        </div>
+        <div class="tabs tabs-dark tabs-icon-top static">
+            <a ui-sref="app.activity" class="tab-item">
+                <i class="icon ion-arrow-graph-up-right"></i> Eventos
+            </a>
+            <a ui-sref="app.friends" class="tab-item">
+                <i class="icon ion-android-people"></i> Sobre Nós
+            </a>
+            <a ui-sref="app.gallery" class="tab-item">
+                <i class="icon ion-images"></i> Galeria
+            </a>
+        </div>
+        <h4 class="content padding double-padding-x">Ultimos Eventos</h4>
+        <div class="list animate-fade-slide-in-right" ng-repeat="registro in registros">
+            <a ui-sref="app.evento({cat_id: registro.categoria_id, evento_id: registro.id})" class="item item-avatar item-icon-right ultimos-eventos">
+                <img ng-src="{{registro.galeria[0].img_file}}" alt="{{registro.titulo_ptbr}}" />
+                <h2>{{registro.titulo_ptbr}}</h2>
+                <p>{{registro.galeria[0].legenda_ptbr}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

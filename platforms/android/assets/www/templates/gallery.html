@@ -1,7 +1,27 @@
-<ion-view view-title="Gallery">
+<ion-view view-title="Galeria">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        <div class="list half">
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+        <div class="list half" >
+            <div class="" ng-repeat="registro in registros">
+                <div ui-sref="app.ultimosEventos" class="card card-gallery item_ item-text-wrap">
+                    <div class="ink dark-bg">
+                        <h2>{{registro.legenda_ptbr}}</h2>
+                        <img ng-src="{{registro.img_file}}" alt="{{registro.titulo_ptbr}}" />
+                    </div>
+                    <div class="item tabs tabs-secondary tabs-icon-left">
+                        <a class="tab-item stable-bg assertive">
+                            <i class="icon ion-heart"></i>
+                            4
+                        </a>
+                        <a class="tab-item stable-bg positive-900">
+                            <i class="icon ion-chatbubbles"></i>
+                            2
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div ui-sref="app.ultimosEventos" class="card card-gallery item item-text-wrap">
                 <div class="ink dark-bg">
                     <h2>Where's Elsa?</h2>
                     <img class="full-image" src="img/sansa-snowcastle3.jpg">
@@ -16,8 +36,8 @@
                         2
                     </a>
                 </div>
-            </div>
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+            </div> -->
+            <!-- <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
                 <div class="ink dark-bg">
                     <h2>Hmm. Hope nobody destroys this!</h2>
                     <img class="full-image" src="img/sansa-snowcastle.png">
@@ -32,9 +52,10 @@
                         1
                     </a>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="list half">
+
+        <!-- <div class="list half">
             <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
                 <div class="ink dark-bg">
                     <h2>Making Olaf a House</h2>
@@ -67,6 +88,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
+
     </ion-content>
 </ion-view>

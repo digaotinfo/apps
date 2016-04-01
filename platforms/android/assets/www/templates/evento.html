@@ -1,0 +1,29 @@
+<ion-view view-title="{{registro.titulo_ptbr}}">
+    <ion-content ng-class="{expanded:isExpanded}">
+        <div class="item card-item">
+            <div ui-sref="app.gallery({evento_id: registro.id})" class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <h2>{{registro.galeria[0].legenda_ptbr}}</h2>
+                    <span class="avatar" ng-style="{'background-image':'url('+registro.galeria[0].img_file+')'}"></span>
+
+                        <a class="image" ng-if="registro.galeria[1]">
+                            <img ng-src="{{registro.galeria[1].img_file}}" alt="{{registro.galeria[1].legenda_ptbr}}" />
+                        </a>
+
+                    <div class="texto" ng-bind-html="registro.texto_ptbr"></div>
+
+                    <div class="card-footer text-right">
+                        <div class="pull-left">
+                            <i class="icon ion-clock"></i> realizado em <span ng-bind="registro.created | date:'medium'"></span></span>
+                        </div>
+                        <div class="pull-right galeria">
+                            <a>
+                                <i class="icon ion-images"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
 .constant('URL', {
-    root: 'http://localhost/mmgpApp/www/',
+    root: 'http://www.aplicativos.dreamhosters.com/mmgpApp/',
     conteudo: "app-conteudo",
     confDashboard: "app-configuracoes-dashboard"
 })
