@@ -129,61 +129,61 @@ angular.module('starter.controllers', [])
     var jsonResult = JSON.conteudo().then(
         function(data) {     // On success
             $scope.registros = data;
+
+            // Set Motion
+            $timeout(function() {
+                ionicMaterialMotion.slideUp({
+                    selector: '.slide-up'
+                });
+            }, 300);
+
+            $timeout(function() {
+                ionicMaterialMotion.fadeSlideInRight();
+            }, 700);
+
+            // Set Ink
+            ionicMaterialInk.displayEffect();
         },
         function(data) {   // On failure
             console.log('parte 2 ====>');
             console.log(data);
         });
 
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
 
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideInRight();
-    }, 900);
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
 })
 // .controller('EventoCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, JSON) {
 //     // Set Header
-//     $scope.$parent.showHeader();
-//     $scope.$parent.clearFabs();
-//     $scope.isExpanded = false;
-//     $scope.$parent.setExpanded(false);
-//     $scope.$parent.setHeaderFab(false);
+//     // $scope.$parent.showHeader();
+//     // $scope.$parent.clearFabs();
+//     // $scope.isExpanded = false;
+//     // $scope.$parent.setExpanded(false);
+//     // $scope.$parent.setHeaderFab(false);
 //
 //     var jsonResult = JSON.conteudoEvento($stateParams.cat_id, $stateParams.evento_id).then(
 //         function(data) {     // On success
-//             $scope.registro = data;
-//             console.log(JSON.img);
+//             $scope.registro = data[0];
 //         },
 //         function(data) {   // On failure
 //             console.log('erro');
 //             console.log(data);
 //         });
 //
-//     // Set Motion
-//     $timeout(function() {
-//         ionicMaterialMotion.slideUp({
-//             selector: '.slide-up'
-//         });
-//     }, 300);
-//
-//     $timeout(function() {
-//         ionicMaterialMotion.fadeSlideInRight({
-//             startVelocity: 3000
-//         });
-//     }, 10000);
-//
-//     // Set Ink
-//     ionicMaterialInk.displayEffect();
+//     // // Set Motion
+//     // $timeout(function() {
+//     //     ionicMaterialMotion.slideUp({
+//     //         selector: '.slide-up'
+//     //     });
+//     // }, 300);
+//     //
+//     // $timeout(function() {
+//     //     ionicMaterialMotion.fadeSlideInRight({
+//     //         startVelocity: 3000
+//     //     });
+//     // }, 10000);
+//     //
+//     // // Set Ink
+//     // ionicMaterialInk.displayEffect();
 // })
-
 
 .controller('EventoCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', '$ionicModal', '$ionicSlideBoxDelegate', 'JSON', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicModal, $ionicSlideBoxDelegate, JSON) {
     // Set Header
@@ -195,13 +195,90 @@ angular.module('starter.controllers', [])
 
     var jsonResult = JSON.conteudoEvento($stateParams.cat_id, $stateParams.evento_id).then(
         function(data) {     // On success
-            $scope.registro = data;
-            $scope.aImages = data.galeria;
+            // console.log(data);
+            $scope.registro = data[0];
+            $scope.aImages = data[0].galeria;
+
+            /*
+            *
+            * modal de imagem >>>
+            */
+            $ionicModal.fromTemplateUrl('image-modal.html', {
+              scope: $scope,
+              animation: 'slide-in-up'
+            }).then(function(modal) {
+              $scope.modal = modal;
+            });
+
+            $scope.openModal = function() {
+              $ionicSlideBoxDelegate.slide(0);
+              $scope.modal.show();
+            };
+
+            $scope.closeModal = function() {
+              $scope.modal.hide();
+            };
+
+            // Cleanup the modal when we're done with it!
+            $scope.$on('$destroy', function() {
+              $scope.modal.remove();
+            });
+            // Execute action on hide modal
+            $scope.$on('modal.hide', function() {
+              // Execute action
+            });
+            // Execute action on remove modal
+            $scope.$on('modal.removed', function() {
+              // Execute action
+            });
+            $scope.$on('modal.shown', function() {
+            });
+
+            // Call this functions if you need to manually control the slides
+            $scope.next = function() {
+              $ionicSlideBoxDelegate.next();
+            };
+
+            $scope.previous = function() {
+              $ionicSlideBoxDelegate.previous();
+            };
+
+          	$scope.goToSlide = function(index) {
+              $scope.modal.show();
+              $ionicSlideBoxDelegate.slide(index);
+            }
+
+            // Called each time the slide changes
+            $scope.slideChanged = function(index) {
+              $scope.slideIndex = index;
+            };
+            /*
+            *
+            * <<< modal de imagem
+            */
+            // Set Motion
+            $timeout(function() {
+                ionicMaterialMotion.slideUp({
+                    selector: '.slide-up'
+                });
+            }, 300);
+
+            $timeout(function() {
+                ionicMaterialMotion.fadeSlideInRight({
+                    startVelocity: 3000
+                });
+            }, 700);
+
+            // Set Ink
+            ionicMaterialInk.displayEffect();
         },
         function(data) {   // On failure
             console.log('erro');
             console.log(data);
         });
+
+
+
 
     // Set Motion
     $timeout(function() {
@@ -219,65 +296,13 @@ angular.module('starter.controllers', [])
     // Set Ink
     ionicMaterialInk.displayEffect();
 
-    /*
-    *
-    * modal de imagem >>>
-    */
-    $ionicModal.fromTemplateUrl('image-modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
 
-    $scope.openModal = function() {
-      $ionicSlideBoxDelegate.slide(0);
-      $scope.modal.show();
-    };
-
-    $scope.closeModal = function() {
-      $scope.modal.hide();
-    };
-
-    // Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hide', function() {
-      // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function() {
-      // Execute action
-    });
-    $scope.$on('modal.shown', function() {
-    });
-
-    // Call this functions if you need to manually control the slides
-    $scope.next = function() {
-      $ionicSlideBoxDelegate.next();
-    };
-
-    $scope.previous = function() {
-      $ionicSlideBoxDelegate.previous();
-    };
-
-  	$scope.goToSlide = function(index) {
-      $scope.modal.show();
-      $ionicSlideBoxDelegate.slide(index);
-    }
-
-    // Called each time the slide changes
-    $scope.slideChanged = function(index) {
-      $scope.slideIndex = index;
-    };
-    /*
-    *
-    * <<< modal de imagem
-    */
   }
 ])
+
+
+
+
 
 .controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     $scope.$parent.showHeader();

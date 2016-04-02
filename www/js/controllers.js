@@ -153,39 +153,37 @@ angular.module('starter.controllers', [])
 })
 // .controller('EventoCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, JSON) {
 //     // Set Header
-//     $scope.$parent.showHeader();
-//     $scope.$parent.clearFabs();
-//     $scope.isExpanded = false;
-//     $scope.$parent.setExpanded(false);
-//     $scope.$parent.setHeaderFab(false);
+//     // $scope.$parent.showHeader();
+//     // $scope.$parent.clearFabs();
+//     // $scope.isExpanded = false;
+//     // $scope.$parent.setExpanded(false);
+//     // $scope.$parent.setHeaderFab(false);
 //
 //     var jsonResult = JSON.conteudoEvento($stateParams.cat_id, $stateParams.evento_id).then(
 //         function(data) {     // On success
-//             $scope.registro = data;
-//             console.log(JSON.img);
+//             $scope.registro = data[0];
 //         },
 //         function(data) {   // On failure
 //             console.log('erro');
 //             console.log(data);
 //         });
 //
-//     // Set Motion
-//     $timeout(function() {
-//         ionicMaterialMotion.slideUp({
-//             selector: '.slide-up'
-//         });
-//     }, 300);
-//
-//     $timeout(function() {
-//         ionicMaterialMotion.fadeSlideInRight({
-//             startVelocity: 3000
-//         });
-//     }, 10000);
-//
-//     // Set Ink
-//     ionicMaterialInk.displayEffect();
+//     // // Set Motion
+//     // $timeout(function() {
+//     //     ionicMaterialMotion.slideUp({
+//     //         selector: '.slide-up'
+//     //     });
+//     // }, 300);
+//     //
+//     // $timeout(function() {
+//     //     ionicMaterialMotion.fadeSlideInRight({
+//     //         startVelocity: 3000
+//     //     });
+//     // }, 10000);
+//     //
+//     // // Set Ink
+//     // ionicMaterialInk.displayEffect();
 // })
-
 
 .controller('EventoCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', '$ionicModal', '$ionicSlideBoxDelegate', 'JSON', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicModal, $ionicSlideBoxDelegate, JSON) {
     // Set Header
@@ -198,8 +196,8 @@ angular.module('starter.controllers', [])
     var jsonResult = JSON.conteudoEvento($stateParams.cat_id, $stateParams.evento_id).then(
         function(data) {     // On success
             // console.log(data);
-            $scope.registro = data;
-            $scope.aImages = data.galeria;
+            $scope.registro = data[0];
+            $scope.aImages = data[0].galeria;
 
             /*
             *
@@ -282,25 +280,29 @@ angular.module('starter.controllers', [])
 
 
 
-    // // Set Motion
-    // $timeout(function() {
-    //     ionicMaterialMotion.slideUp({
-    //         selector: '.slide-up'
-    //     });
-    // }, 300);
-    //
-    // $timeout(function() {
-    //     ionicMaterialMotion.fadeSlideInRight({
-    //         startVelocity: 3000
-    //     });
-    // }, 10000);
-    //
-    // // Set Ink
-    // ionicMaterialInk.displayEffect();
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 10000);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
 
 
   }
 ])
+
+
+
+
 
 .controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     $scope.$parent.showHeader();

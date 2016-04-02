@@ -66,11 +66,13 @@ app.factory('JSON', function($q, $http) {
                     $.each(res.data, function( key, values ){
                         $.each(values, function( index, val ){
                             if( (val.categoria_id == cat_id) && (val.id == evento_id) ){
-                                registro = val;
+                                // registro = val;
+                                registro.push(val);
                             }
                         });
                     });
-                    deferred.resolve(registro);
+                    // console.log(registro);
+                    deferred.resolve(registro[0]);
                 }, function(data){
                     console.log("error");
                     console.log(data);
