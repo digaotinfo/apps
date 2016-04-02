@@ -121,87 +121,35 @@ angular.module('starter.controllers', [])
     // $scope.isExpanded = false;
     // $scope.$parent.setExpanded(false);
     // $scope.$parent.setHeaderFab(false);
-
-    var serialize = $.param({
-						k: 'BL117974797479747963AC'
-					});
-    // $scope.default = URL;
-    var config = {
+    // var serialize = $.param({
+    // 					k: 'BL117974797479747963AC'
+    // 				});
+    var req = {
         method: 'POST',
         url: URL.root+URL.conteudo,
         headers: {
-            'Content-Type': undefined
-            // 'Content-Type': 'application/x-www-form-urlencoded'
-        }
-        // data: {
-        //     "channel": "teste"
-        // }
-    };
-    $http(config).success(function(data) {
-        var registros = [];
-        $.each(data, function( key, values ){
-            $.each(values, function( index, val ){
-                if( val.categoria_id == "31" ){
-                    registros.push(val);
-                }
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        // data: { test: 'test' }
+    }
+
+    $http(req)
+        .then(function(res){
+            var registros = [];
+            $.each(res.data, function( key, values ){
+                $.each(values, function( index, val ){
+                    if( val.categoria_id == "31" ){
+                        registros.push(val);
+                    }
+                });
             });
+            $scope.registros = registros;
+        }, function(data){
+            console.log("error");
+            console.log(data);
+
         });
-        $scope.registros = registros;
 
-        // // Set Motion
-        // $timeout(function() {
-        //     ionicMaterialMotion.slideUp({
-        //         selector: '.slide-up'
-        //     });
-        // }, 900);
-        //
-        // $timeout(function() {
-        //     ionicMaterialMotion.fadeSlideInRight({
-        //         startVelocity: 3000
-        //     });
-        // }, 1400);
-        // // Set Ink
-        // ionicMaterialInk.displayEffect();
-    }).error(function(response) {
-        console.log('erro');
-        console.log(response);
-    });
-    // $http({
-    //     url: URL.root+URL.conteudo,
-    //     method: 'POST',
-    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //     // data: serialize
-    // }).
-    //     success(function(data) {
-    //         var registros = [];
-    //         $.each(data, function( key, values ){
-    //             $.each(values, function( index, val ){
-    //                 if( val.categoria_id == "31" ){
-    //                     registros.push(val);
-    //                 }
-    //             });
-    //         });
-    //         $scope.registros = registros;
-    //     }).
-    //     error(function(data) {
-    //         console.log('erro');
-    //         console.log(data);
-    //     }
-    // );
-
-
-    // // Set Motion
-    // $timeout(function() {
-    //     ionicMaterialMotion.slideUp({
-    //         selector: '.slide-up'
-    //     });
-    // }, 900);
-    //
-    // $timeout(function() {
-    //     ionicMaterialMotion.fadeSlideInRight({
-    //         startVelocity: 3000
-    //     });
-    // }, 1400);
 
     // Set Motion
     $timeout(function() {
@@ -211,10 +159,9 @@ angular.module('starter.controllers', [])
     }, 300);
 
     $timeout(function() {
-        ionicMaterialMotion.fadeSlideInRight({
-            startVelocity: 3000
-        });
-    }, 10000);
+        ionicMaterialMotion.fadeSlideInRight();
+    }, 800);
+
     // Set Ink
     ionicMaterialInk.displayEffect();
 })
@@ -226,32 +173,29 @@ angular.module('starter.controllers', [])
     // $scope.$parent.setExpanded(false);
     // $scope.$parent.setHeaderFab(false);
 
-    var config = {
+    var req = {
         method: 'POST',
         url: URL.root+URL.conteudo,
         headers: {
-            'Content-Type': undefined
-            // 'Content-Type': 'application/x-www-form-urlencoded'
-        }
-        // data: {
-        //     "channel": "teste"
-        // }
-    };
-    $http(config).success(function(data) {
-        $.each(data, function( key, values ){
-            $.each(values, function( index, val ){
-                if( (val.categoria_id == $stateParams.cat_id) && (val.id == $stateParams.evento_id) ){
-                    $scope.registro = val;
-                }
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        // data: { test: 'test' }
+    }
+
+    $http(req)
+        .then(function(res){
+            $.each(res.data, function( key, values ){
+                $.each(values, function( index, val ){
+                    if( (val.categoria_id == $stateParams.cat_id) && (val.id == $stateParams.evento_id) ){
+                        $scope.registro = val;
+                    }
+                });
             });
+        }, function(data){
+            console.log("error");
+            console.log(data);
+
         });
-
-
-
-    }).error(function(response) {
-        console.log('erro');
-        console.log(response);
-    });
 
     // Set Motion
     $timeout(function() {
@@ -264,49 +208,10 @@ angular.module('starter.controllers', [])
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 3000
         });
-    }, 10000);
+    }, 20000);
 
     // Set Ink
     ionicMaterialInk.displayEffect();
-
-    // $http({
-    //     url: URL.root+URL.conteudo,
-    //     method: 'POST',
-    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //     // data: serialize
-    // }).
-    //     success(function(data) {
-    //         $.each(data, function( key, values ){
-    //             $.each(values, function( index, val ){
-    //                 if( (val.categoria_id == $stateParams.cat_id) && (val.id == $stateParams.evento_id) ){
-    //                     $scope.registro = val;
-    //                 }
-    //             });
-    //         });
-    //     }).
-    //     error(function(data) {
-    //         console.log('erro');
-    //         console.log(data);
-    //     }
-    // );
-
-
-
-    // // Set Motion
-    // $timeout(function() {
-    //     ionicMaterialMotion.slideUp({
-    //         selector: '.slide-up'
-    //     });
-    // }, 900);
-    //
-    // $timeout(function() {
-    //     ionicMaterialMotion.fadeSlideInRight({
-    //         startVelocity: 3000
-    //     });
-    // }, 1400);
-    //
-    // // Set Ink
-    // ionicMaterialInk.displayEffect();
 })
 
 .controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
@@ -332,68 +237,45 @@ angular.module('starter.controllers', [])
     // $scope.isExpanded = true;
     // $scope.$parent.setExpanded(true);
     // $scope.$parent.setHeaderFab(false);
-
-    var config = {
+    var req = {
         method: 'POST',
         url: URL.root+URL.conteudo,
         headers: {
-            'Content-Type': undefined
-            // 'Content-Type': 'application/x-www-form-urlencoded'
-        }
-        // data: {
-        //     "channel": "teste"
-        // }
-    };
-    $http(config).success(function(data) {
-        var registros = [];
-        $.each(data, function( key, values ){
-            $.each(values, function( index, val ){
-                if( (val.id == $stateParams.evento_id) ){
-                    registros.push(val.galeria);
-                }
-            });
-        });
-        $scope.registros = registros[0];
-    }).error(function(response) {
-        console.log('erro');
-        console.log(response);
-    });
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        // data: { test: 'test' }
+    }
 
-    // $http({
-    //     url: URL.root+URL.conteudo,
-    //     method: 'POST',
-    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //     // data: serialize
-    // }).
-    //     success(function(data) {
-    //         // console.log(data);
-    //         var registros = [];
-    //         $.each(data, function( key, values ){
-    //             $.each(values, function( index, val ){
-    //                 if( (val.id == $stateParams.evento_id) ){
-    //                     registros.push(val.galeria);
-    //                 }
-    //             });
-    //         });
-    //         $scope.registros = registros[0];
-    //     }).
-    //     error(function(data) {
-    //         console.log('erro');
-    //         console.log(data);
-    //     }
-    // );
+    $http(req)
+        .then(function(res){
+            var registros = [];
+            $.each(res.data, function( key, values ){
+                $.each(values, function( index, val ){
+                    if( (val.id == $stateParams.evento_id) ){
+                        registros.push(val.galeria);
+                    }
+                });
+            });
+            console.log(registros);
+            $scope.registros = registros[0];
+        }, function(data){
+            console.log("error");
+            console.log(data);
+
+        });
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
-
-    ionicMaterialMotion.pushDown({
-        selector: '.push-down'
-    });
+    $timeout(function() {
+        ionicMaterialMotion.pushDown({
+            selector: '.push-down'
+        });
+    }, 300);
     $timeout(function() {
         ionicMaterialMotion.fadeSlideInRight({
             selector: '.animate-fade-slide-in .item'
         });
-    }, 10000);
+    }, 2000);
 })
 
 ;
