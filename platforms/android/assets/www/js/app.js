@@ -4,7 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
+// angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material', 'ionMdInput'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material', 'ionMdInput'])
+
 .constant('URL', {
     root: 'http://www.aplicativos.dreamhosters.com/mmgpApp/',
     conteudo: "app-conteudo",
@@ -131,15 +133,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             'menuContent': {
                 templateUrl: 'templates/evento.html',
                 controller: 'EventoCtrl'
+            },
+            'fabContent': {
+                template: '<button id="fab-profile" ng-click="openModal()" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-images"></i></button>',
+                controller: 'EventoCtrl'
+                // controller: function ($timeout) {
+                //     // /*$timeout(function () {
+                //     //     document.getElementById('fab-profile').classList.toggle('on');
+                //     // }, 800);*/
+                // }
             }
-            // 'fabContent': {
-            //     template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-images"></i></button>',
-            //     controller: function ($timeout) {
-            //         // /*$timeout(function () {
-            //         //     document.getElementById('fab-profile').classList.toggle('on');
-            //         // }, 800);*/
-            //     }
-            // }
         }
     })
     ;
