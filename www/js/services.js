@@ -2,8 +2,15 @@ var app = angular.module('starter.services', ['ionic']);
 
 app.factory('JSON', function($q, $http) {
   // Might use a resource here that returns a JSON array
-   var deferred = $q.defer();
-
+  /*
+  *
+  * Constants >>>
+  */
+  var root = "http://www.aplicativos.dreamhosters.com/mmgpApp/";
+  /*
+  *
+  * <<< Constants
+  */
     return {
         all: function() {
             // return $resource;
@@ -22,11 +29,12 @@ app.factory('JSON', function($q, $http) {
           return null;
         },
         conteudo: function(){
-            var registros = [];
+            var deferredContent = $q.defer();
+            var eventos = [];
             var req = {
-                async: false,
+                // async: false,
                 method: 'POST',
-                url: 'http://www.aplicativos.dreamhosters.com/mmgpApp/app-conteudo',
+                url: root+'app-conteudo',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -38,23 +46,24 @@ app.factory('JSON', function($q, $http) {
                     $.each(res.data, function( key, values ){
                         $.each(values, function( index, val ){
                             if( val.categoria_id == "31" ){
-                                registros.push(val);
+                                eventos.push(val);
                             }
                         });
                     });
-                    deferred.resolve(registros);
+                    deferredContent.resolve(eventos);
                 }, function(data){
                     console.log("error");
                     console.log(data);
                 });
-            return deferred.promise;
+            return deferredContent.promise;
         },
         conteudoEvento: function(cat_id, evento_id){
-            var registro = [];
+            var deferredEvento = $q.defer();
+            var evento = [];
             var req = {
-                async: false,
+                // async: false,
                 method: 'POST',
-                url: 'http://www.aplicativos.dreamhosters.com/mmgpApp/app-conteudo',
+                url: root+'app-conteudo',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -64,27 +73,25 @@ app.factory('JSON', function($q, $http) {
             $http(req)
                 .then(function(res){
                     $.each(res.data, function( key, values ){
-                        $.each(values, function( index, val ){
-                            if( (val.categoria_id == cat_id) && (val.id == evento_id) ){
-                                // registro = val;
-                                registro.push(val);
+                        $.each(values, function( index, enventoSelecionado ){
+                            if( (enventoSelecionado.categoria_id == cat_id) && (enventoSelecionado.id == evento_id) ){
+                                deferredEvento.resolve(enventoSelecionado);
                             }
                         });
                     });
-                    // console.log(registro);
-                    deferred.resolve(registro[0]);
                 }, function(data){
                     console.log("error");
                     console.log(data);
                 });
-            return deferred.promise;
+            return deferredEvento.promise;
         },
         galeria: function(cat_id, evento_id){
+            var deferredGaleria = $q.defer();
             var galeria = [];
             var req = {
-                async: false,
+                // async: false,
                 method: 'POST',
-                url: 'http://www.aplicativos.dreamhosters.com/mmgpApp/app-conteudo',
+                url: root+'app-conteudo',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -96,16 +103,15 @@ app.factory('JSON', function($q, $http) {
                     $.each(res.data, function( key, values ){
                         $.each(values, function( index, val ){
                             if( (val.categoria_id == cat_id) && (val.id == evento_id) ){
-                                galeria = val.galeria;
+                                deferredGaleria.resolve(val.galeria);
                             }
                         });
                     });
-                    deferred.resolve(galeria);
                 }, function(data){
                     console.log("error");
                     console.log(data);
                 });
-            return deferred.promise;
+            return deferredGaleria.promise;
         }
     };
 });

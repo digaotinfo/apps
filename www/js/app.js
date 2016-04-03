@@ -27,7 +27,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-
     // Turn off caching for demo simplicity's sake
     $ionicConfigProvider.views.maxCache(0);
 
@@ -129,6 +128,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
     .state('app.evento', {
         url: '/evento/:cat_id/:evento_id',
+        cache: true,
         views: {
             'menuContent': {
                 templateUrl: 'templates/evento.html',
@@ -136,7 +136,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             },
             'fabContent': {
                 template: '<button id="fab-profile" ng-click="openModal()" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-images"></i></button>',
-                controller: 'EventoCtrl'
+                controller: 'GaleriaCtrl'
                 // controller: function ($timeout) {
                 //     // /*$timeout(function () {
                 //     //     document.getElementById('fab-profile').classList.toggle('on');
