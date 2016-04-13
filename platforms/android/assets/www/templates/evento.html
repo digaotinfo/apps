@@ -1,28 +1,28 @@
-<ion-view view-title="{{registro.titulo_ptbr}}">
+<ion-view view-title="{{evento.titulo_ptbr}}">
     <ion-content ng-class="{expanded:isExpanded}">
         <div class="item card-item evento">
             <div class="card stable-bg ink ink-dark">
                 <div class="item item-avatar item-text-wrap">
-                    <img ng-src="{{registro.galeria[0].img_file}}">
-                    <h2>{{registro.galeria[0].legenda_ptbr}}</h2>
+                    <img ng-src="{{evento.galeria[0].img_file}}">
+                    <h2>{{evento.galeria[0].legenda_ptbr}}</h2>
                 </div>
                 <div class="row">
                     <div class="col col-100">
                         <div class="item item-image">
-                            <a class="image" ng-if="registro.galeria[1]">
-                                <img ng-src="{{registro.galeria[1].img_file}}" alt="{{registro.galeria[1].legenda_ptbr}}" />
+                            <a class="image" ng-if="evento.galeria[0]">
+                                <img ng-src="{{evento.galeria[0].img_file}}" alt="{{evento.galeria[1].legenda_ptbr}}" />
                             </a>
                         </div>
 
                         <div class="col col-100">
-                            <div class="texto item-text-wrap" ng-bind-html="registro.texto_ptbr"></div>
+                            <div class="texto item-text-wrap" ng-bind-html="evento.texto_ptbr"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row item item-avatar_ item-text-wrap">
                     <div class="col col-100 card-footer text-right">
                         <div class="pull-left">
-                            <i class="icon ion-clock"></i> realizado em <span ng-bind="registro.created | date:'medium'"></span></span>
+                            <i class="icon ion-clock"></i> realizado em  <span>{{evento.created | dateToISO | date:'MM/dd/yyyy'}}</span></span>
                         </div>
                     </div>
                 </div>
@@ -31,15 +31,15 @@
         </div>
 
         <script id="image-modal.html" type="text/ng-template">
-            <div class="modal image-modal transparent"
-                 ng-click="closeModal()">
-              <ion-slide-box on-slide-changed="slideChanged(index)"
-                             show-pager="false">
-                <ion-slide ng-repeat="oImage in aImages">
-                  <img ng-src="{{oImage.img_file}}" class="fullscreen-image" />
-                  <p class="info">{{oImage.legenda_ptbr}}</p>
-                </ion-slide>
-              </ion-slide-box>
+            <div class="modal image-modal transparent galeria" ng-click="closeModal()">
+                <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false">
+                    <ion-slide ng-repeat="oImage in aImages">
+                        <img ng-src="{{oImage.img_file}}" class="fullscreen-image" />
+                        <p class="info">
+                            {{oImage.legenda_ptbr}}
+                        </p>
+                    </ion-slide>
+                </ion-slide-box>
             </div>
         </script>
     </ion-content>

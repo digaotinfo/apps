@@ -126,6 +126,7 @@ h4.subHeader{font-size: 80%;    text-shadow: 2px 1px #000000;}
 .galeria p.info{
     background-color: rgba(000,0,0,0.5);
     padding: 20px 0px;
+    line-height: 100%;
 }
 
 

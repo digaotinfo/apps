@@ -18,7 +18,7 @@
             </a>
         </div>
         <h4 class="content padding double-padding-x">Ultimos Eventos</h4>
-        <div class="list animate-fade-slide-in-right" ng-repeat="registro in registros">
+        <div class="list animate-fade-slide-in-right" ng-repeat="registro in registrosEventos">
             <a ui-sref="app.evento({cat_id: registro.categoria_id, evento_id: registro.id})" class="item item-avatar item-icon-right ultimos-eventos">
                 <img ng-src="{{registro.galeria[0].img_file}}" alt="{{registro.titulo_ptbr}}" />
                 <h2>{{registro.titulo_ptbr}}</h2>

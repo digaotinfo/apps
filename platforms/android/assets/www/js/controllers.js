@@ -128,7 +128,7 @@ angular.module('starter.controllers', [])
 
     var jsonResult = JSON.conteudo().then(
         function(data) {     // On success
-            $scope.registros = data;
+            $scope.registrosEventos = data;
 
             // Set Motion
             $timeout(function() {
@@ -151,41 +151,7 @@ angular.module('starter.controllers', [])
 
 
 })
-// .controller('EventoCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, JSON) {
-//     // Set Header
-//     // $scope.$parent.showHeader();
-//     // $scope.$parent.clearFabs();
-//     // $scope.isExpanded = false;
-//     // $scope.$parent.setExpanded(false);
-//     // $scope.$parent.setHeaderFab(false);
-//
-//     var jsonResult = JSON.conteudoEvento($stateParams.cat_id, $stateParams.evento_id).then(
-//         function(data) {     // On success
-//             $scope.registro = data[0];
-//         },
-//         function(data) {   // On failure
-//             console.log('erro');
-//             console.log(data);
-//         });
-//
-//     // // Set Motion
-//     // $timeout(function() {
-//     //     ionicMaterialMotion.slideUp({
-//     //         selector: '.slide-up'
-//     //     });
-//     // }, 300);
-//     //
-//     // $timeout(function() {
-//     //     ionicMaterialMotion.fadeSlideInRight({
-//     //         startVelocity: 3000
-//     //     });
-//     // }, 10000);
-//     //
-//     // // Set Ink
-//     // ionicMaterialInk.displayEffect();
-// })
-
-.controller('EventoCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', '$ionicModal', '$ionicSlideBoxDelegate', 'JSON', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicModal, $ionicSlideBoxDelegate, JSON) {
+.controller('EventoCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, JSON) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -194,10 +160,45 @@ angular.module('starter.controllers', [])
     $scope.$parent.setHeaderFab(false);
 
     var jsonResult = JSON.conteudoEvento($stateParams.cat_id, $stateParams.evento_id).then(
+        function(dataEvento) {     // On success
+            $scope.evento = dataEvento;
+        },
+        function(data) {   // On failure
+            console.log('erro');
+            console.log(data);
+        });
+
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 10000);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+})
+
+.controller('GaleriaCtrl', ['$scope', '$stateParams', '$timeout', 'ionicMaterialMotion', 'ionicMaterialInk', '$ionicModal', '$ionicSlideBoxDelegate', 'JSON', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicModal, $ionicSlideBoxDelegate, JSON) {
+    // // Set Header
+    // $scope.$parent.showHeader();
+    // $scope.$parent.clearFabs();
+    // $scope.isExpanded = false;
+    // $scope.$parent.setExpanded(false);
+    // $scope.$parent.setHeaderFab(false);
+
+    var jsonResult = JSON.galeria($stateParams.cat_id, $stateParams.evento_id).then(
         function(data) {     // On success
+            // console.log('Galeria ====>');
             // console.log(data);
-            $scope.registro = data[0];
-            $scope.aImages = data[0].galeria;
+            // console.log('<===== Galeria');
+            $scope.aImages = data;
 
             /*
             *
@@ -256,52 +257,44 @@ angular.module('starter.controllers', [])
             *
             * <<< modal de imagem
             */
-            // Set Motion
-            $timeout(function() {
-                ionicMaterialMotion.slideUp({
-                    selector: '.slide-up'
-                });
-            }, 300);
-
-            $timeout(function() {
-                ionicMaterialMotion.fadeSlideInRight({
-                    startVelocity: 3000
-                });
-            }, 700);
-
-            // Set Ink
-            ionicMaterialInk.displayEffect();
+            // // Set Motion
+            // $timeout(function() {
+            //     ionicMaterialMotion.slideUp({
+            //         selector: '.slide-up'
+            //     });
+            // }, 300);
+            //
+            // $timeout(function() {
+            //     ionicMaterialMotion.fadeSlideInRight({
+            //         startVelocity: 3000
+            //     });
+            // }, 700);
+            //
+            // // Set Ink
+            // ionicMaterialInk.displayEffect();
         },
         function(data) {   // On failure
             console.log('erro');
             console.log(data);
         });
 
-
-
-
-    // Set Motion
-    $timeout(function() {
-        ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
-        });
-    }, 300);
-
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideInRight({
-            startVelocity: 3000
-        });
-    }, 10000);
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-
-
-  }
+    // // Set Motion
+    // $timeout(function() {
+    //     ionicMaterialMotion.slideUp({
+    //         selector: '.slide-up'
+    //     });
+    // }, 300);
+    //
+    // $timeout(function() {
+    //     ionicMaterialMotion.fadeSlideInRight({
+    //         startVelocity: 3000
+    //     });
+    // }, 10000);
+    //
+    // // Set Ink
+    // ionicMaterialInk.displayEffect();
+    }
 ])
-
-
-
 
 
 .controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
@@ -346,7 +339,6 @@ angular.module('starter.controllers', [])
                     }
                 });
             });
-            console.log(registros);
             $scope.registros = registros[0];
         }, function(data){
             console.log("error");
@@ -354,18 +346,24 @@ angular.module('starter.controllers', [])
 
         });
 
-    // Activate ink for controller
-    ionicMaterialInk.displayEffect();
-    $timeout(function() {
-        ionicMaterialMotion.pushDown({
-            selector: '.push-down'
-        });
-    }, 300);
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideInRight({
-            selector: '.animate-fade-slide-in .item'
-        });
-    }, 20000);
+    // $timeout(function() {
+    //     ionicMaterialMotion.pushDown({
+    //         selector: '.push-down'
+    //     });
+    // }, 300);
+    // $timeout(function() {
+    //     ionicMaterialMotion.fadeSlideInRight({
+    //         selector: '.animate-fade-slide-in .item'
+    //     });
+    // }, 20000);
+    // // Activate ink for controller
+    // ionicMaterialInk.displayEffect();
 })
+.filter('dateToISO', function() {
+  return  function(date){
+          var dateOut = new Date(date);
+          return dateOut;
 
+  };
+})
 ;
